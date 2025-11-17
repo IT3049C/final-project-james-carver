@@ -1,5 +1,5 @@
 # GameHub
-
+I will be doing this solo
 ## Checklist
 
 - [ ] frequent commits to github.
