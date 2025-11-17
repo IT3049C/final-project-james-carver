@@ -1,5 +1,5 @@
 # GameHub
-
+I, James Carver will be doing this solo
 ## Checklist
 
 - [ ] frequent commits to github.
