@@ -9,10 +9,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "playwright test",
-    "predeploy": "npm run build",
-  
-    "deploy": "gh-pages -d dist"
+    "test": "playwright test"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
