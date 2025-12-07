@@ -2,12 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GameHub</title>
   </head>
   <body>
     <div id="root"></div>
+    <nav>
+      <a class="game-card" href="./wordle.html">Wordle</a>
+      <a class="game-card" href="./rockpaperscissors.html">Rock Paper Scissors</a>
+      <a class="game-card" href="./tictactoe.html">Tic Tac Toe</a>
+      <a class="game-card" href="./hangman.html">Hangman</a>
+    </nav>
+
+
+    <section id="user-input-section">
+      <h2>Player:</h2>
+      <input type="text" id="userInput" placeholder="Type here">
+      <button id="saveButton">Save</button>
+      <p>Player Name: <span id="playername"></span></p>
+    </section>
+
+<script>
+  const input = document.getElementById('userInput');
+  const button = document.getElementById('saveButton');
+  const playernameSpan = document.getElementById('playername');
+
+  // Load saved name on page load
+  window.onload = function() {
+    const saved = localStorage.getItem('playername'); // use "playername"
+    if (saved) {
+      playernameSpan.textContent = saved;
+      input.value = saved; 
+    } else {
+      playernameSpan.textContent = "Guest";
+    }
+  };
+
+  // Save name to localStorage
+  button.addEventListener('click', function() {
+    const value = input.value.trim();
+    if (value) {
+      localStorage.setItem('playername', value); // use "playername"
+      playernameSpan.textContent = value;
+    }
+  });
+</script>
+
+
     <script type="module" src="./src/main.jsx"></script>
   </body>
 </html>

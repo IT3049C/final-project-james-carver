@@ -24,45 +24,81 @@ a:hover {
 
 body {
   margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: top; 
+  align-items: top;     
+  min-height: 100vh;       
+  flex-direction: column;  
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.game-card {
+  background: #333;
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s, background 0.2s;
+  font-size: 1.1rem;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.game-card:hover {
+  transform: translateY(-5px);
+  background: #444;
 }
+
+
+  #user-input-section {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: center; 
+    margin-top: 50px;       
+    gap: 10px;              
+  }
+
+ 
+  #userInput {
+    padding: 10px;
+    width: 250px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  
+  #saveButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  #saveButton:hover {
+    background-color: #45a049;
+  }
+
+
+  #savedValue {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+  }
