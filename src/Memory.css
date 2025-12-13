@@ -1,0 +1,141 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+
+:root {
+  --background: #0b1623;
+  --text-color: #f5f8ff;
+  --border: #3a3a3c;
+  --correct: #538d4e;
+  --misplaced: #b59f3b;
+  --incorrect: #3a3a3c;
+}
+
+
+.light-mode {
+  --background: #f5f8ff;
+  --text-color: #0b1623;
+  --border: #3a3a3c;
+  --correct: #00cc66;
+  --misplaced: #ffcc00;
+  --incorrect: #ff4d4d;
+}
+
+
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+
+#wordle-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(5, 60px);
+  justify-content: center;
+  margin-top: 20px;
+}
+
+
+.letter {
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  text-transform: uppercase;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.correct {
+  background-color: var(--correct);
+  border-color: var(--correct);
+  color: #fff;
+}
+
+.misplaced {
+  background-color: var(--misplaced);
+  border-color: var(--misplaced);
+  color: #fff;
+}
+
+.incorrect {
+  background-color: var(--incorrect);
+  border-color: var(--incorrect);
+  color: #fff;
+}
+
+
+#game-result {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+
+#mode-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.card {
+  width: 80px;
+  height: 80px;
+  background-color: #555555;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.card.active {
+  background-color: #0077ff; 
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: var(--popup-bg, rgb(2, 0, 31)); 
+  color: var(--popup-text, #f5f8ff); 
+  padding: 2rem;
+  text-align: center;
+  border-radius: 10px;
+}
+
+
+.light-mode .popup-content {
+  --popup-bg: #ffffff;  
+  --popup-text: #0b1623; 
+}

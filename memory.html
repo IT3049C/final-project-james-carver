@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Memory Game</title>
+</head>
+<body>
+    <button id="mode-toggle">Dark/Light Mode</button>
+  <div id="root"></div> 
+ <p>Player Name: <span id="playername"></span></p>
+
+<script>
+  // Wait until DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const playerSpan = document.getElementById('playername');
+    const playername = localStorage.getItem('playername'); 
+
+    playerSpan.textContent = playername || "Guest";
+  });
+</script>
+  <script type="module" src="./src/MemoryEntry.jsx"></script>
+  <script type="module" src="./assetsWordle/scripts/dark-mode-toggle.js"></script>
+</body>
+</html>

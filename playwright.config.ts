@@ -8,10 +8,16 @@ export default defineConfig({
     viewport: { width: 1200, height: 800 },
   },
   webServer: {
-    command: "npm run build && npm run preview",
+
+    command: "npm run preview",
     url: "http://localhost:5173",
-    timeout: 120_000,
-    reuseExistingServer: !process.env.CI,
+    timeout: 180_000,           
+    reuseExistingServer: true,  
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
+  ],
 });

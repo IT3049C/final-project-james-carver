@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="./assetsWordle/styles/style.css" />
+</head>
+<body>
+    <header>
+        <button id="mode-toggle">Dark/Light Mode</button>
+    </header>
+
+    <h1>Rock Paper Scissors</h1>
+
+    <div>
+        <button id="player1-toggle">Player 1: HUMAN</button>
+        <button id="player2-toggle">Player 2: CPU</button>
+    </div>
+
+    <div>
+        <h3>Player 1</h3>
+        <button onclick="selectChoice(1, 'rock')">Rock</button>
+        <button onclick="selectChoice(1, 'paper')">Paper</button>
+        <button onclick="selectChoice(1, 'scissors')">Scissors</button>
+    </div>
+
+    <div>
+        <h3>Player 2</h3>
+        <button onclick="selectChoice(2, 'rock')">Rock</button>
+        <button onclick="selectChoice(2, 'paper')">Paper</button>
+        <button onclick="selectChoice(2, 'scissors')">Scissors</button>
+    </div>
+
+
+    <div>
+      <h3> </h3>
+      <h3> </h3>
+      <h3> </h3>
+      <h3> </h3>
+        <button id="play-game-btn">Play Game</button>
+    </div>
+
+   
+    <h2 id="result"></h2>
+
+
+    <p>Player Name: <span id="playername"></span></p>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const playerSpan = document.getElementById('playername');
+        const playername = localStorage.getItem('playername'); 
+        playerSpan.textContent = playername || "Guest";
+      });
+    </script>
+
+    <script type="module" src="assetsWordle/scripts/main.js"></script>
+    <script type="module" src="./assetsWordle/scripts/dark-mode-toggle.js"></script>
+</body>
+</html>
