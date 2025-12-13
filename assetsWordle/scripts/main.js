@@ -154,12 +154,20 @@ const revealedHints = new Set(); // Track revealed indices
 
 hintBtn.addEventListener("click", showHint);
 
+const hintBtn = document.getElementById("hint-btn");
+const hintRow = document.getElementById("hint-row");
+const revealedHints = new Set(); // Track revealed indices
+
+hintBtn.addEventListener("click", showHint);
+
 function showHint() {
+  // Make sure the target word is set
   if (!gameState.targetWord) return;
 
-  const unknownIndices = [];
   const currentAttempt = gameState.currentAttempt;
-  
+  const unknownIndices = [];
+
+  // Collect indices in the current row that are empty and not yet revealed
   for (let i = 0; i < config.wordLength; i++) {
     const cell = document.getElementById(`cell-${currentAttempt}-${i}`);
     if (cell && !cell.textContent && !revealedHints.has(i)) {
@@ -167,21 +175,24 @@ function showHint() {
     }
   }
 
-  if (unknownIndices.length === 0) return;
+  if (unknownIndices.length === 0) return; // all hints revealed
 
   // Pick a random unknown letter index
   const randomIndex = unknownIndices[Math.floor(Math.random() * unknownIndices.length)];
   revealedHints.add(randomIndex);
 
-  // Create a hint letter element
+  // Create the hint letter element using the stored target word
   const hintLetter = document.createElement("div");
   hintLetter.className = "letter hint";
-  hintLetter.textContent = gameState.targetWord[randomIndex];
+  hintLetter.textContent = gameState.targetWord[randomIndex]; // <-- stored word
+
+  // Append to the hint row
   hintRow.appendChild(hintLetter);
 
-  // Optional: animate the hint
+  // Animate the hint if desired
   animateElement(hintLetter, "bounceIn");
 }
+
 
   initWordle();
 }
