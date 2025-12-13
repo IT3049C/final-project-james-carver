@@ -8,10 +8,16 @@ export default defineConfig({
     viewport: { width: 1200, height: 800 },
   },
   webServer: {
-    command: "npm run build && npm run preview",
+    // Only start the preview server; assume build is already done
+    command: "npm run preview",
     url: "http://localhost:5173",
-    timeout: 120_000,
-    reuseExistingServer: !process.env.CI,
+    timeout: 180_000,           // give extra time for Vite preview to start
+    reuseExistingServer: true,  // reuse server if already running
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
+  ],
 });
