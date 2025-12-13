@@ -154,12 +154,6 @@ const revealedHints = new Set(); // Track revealed indices
 
 hintBtn.addEventListener("click", showHint);
 
-const hintBtn = document.getElementById("hint-btn");
-const hintRow = document.getElementById("hint-row");
-const revealedHints = new Set(); // Track revealed indices
-
-hintBtn.addEventListener("click", showHint);
-
 function showHint() {
   // Make sure the target word is set
   if (!gameState.targetWord) return;
