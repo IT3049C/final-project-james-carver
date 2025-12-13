@@ -112,8 +112,9 @@ body {
 }
 
 .card.active {
-  background-color: #0077ff; /* highlight when flashing */
+  background-color: #0077ff; 
 }
+
 .popup {
   position: fixed;
   top: 0;
@@ -127,8 +128,15 @@ body {
 }
 
 .popup-content {
-  background: rgb(2, 0, 31);
+  background-color: var(--popup-bg, rgb(2, 0, 31)); 
+  color: var(--popup-text, #f5f8ff); 
   padding: 2rem;
   text-align: center;
   border-radius: 10px;
+}
+
+
+.light-mode .popup-content {
+  --popup-bg: #ffffff;  
+  --popup-text: #0b1623; 
 }
