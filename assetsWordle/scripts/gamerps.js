@@ -1,20 +1,21 @@
-function play(userChoice) {
-    const choices = ['rock', 'paper', 'scissors'];
-    const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+export function play(userChoice) {
+  const choices = ['rock', 'paper', 'scissors'];
+  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
-    let result = '';
+  let result = '';
 
-    if (userChoice === computerChoice) {
-        result = `It's a tie! You both chose ${userChoice}.`;
-    } else if (
-        (userChoice === 'rock' && computerChoice === 'scissors') ||
-        (userChoice === 'paper' && computerChoice === 'rock') ||
-        (userChoice === 'scissors' && computerChoice === 'paper')
-    ) {
-        result = `You win! ${userChoice} beats ${computerChoice}.`;
-    } else {
-        result = `You lose! ${computerChoice} beats ${userChoice}.`;
-    }
+  if (userChoice === computerChoice) {
+    result = `It's a tie! You both chose ${userChoice}.`;
+  } else if (
+    (userChoice === 'rock' && computerChoice === 'scissors') ||
+    (userChoice === 'paper' && computerChoice === 'rock') ||
+    (userChoice === 'scissors' && computerChoice === 'paper')
+  ) {
+    result = `You win! ${userChoice} beats ${computerChoice}.`;
+  } else {
+    result = `You lose! ${computerChoice} beats ${userChoice}.`;
+  }
 
-    document.getElementById('result').textContent = result;
+  const resultElement = document.getElementById('result');
+  if (resultElement) resultElement.textContent = result;
 }
