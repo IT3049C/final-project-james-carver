@@ -177,93 +177,10 @@ if (resultElement) {
     resultElement.textContent = result;
   }
 
-  // Make it globally accessible for onclick buttons
   window.play = play;
 }
 
 // ===== MEMORY CARDS CODE =====
-const game = document.getElementById("game");
-const startBtn = document.getElementById("startBtn");
-const statusText = document.getElementById("status");
-
-if (game && startBtn && statusText) {
-  const gridSize = 16;
-
-  let sequence = [];
-  let playerSequence = [];
-  let canClick = false;
-
-  // Create grid
-  const cards = [];
-  game.innerHTML = ""; // safety reset
-
-  for (let i = 0; i < gridSize; i++) {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.dataset.index = i;
-    card.addEventListener("click", () => handleClick(i));
-    game.appendChild(card);
-    cards.push(card);
-  }
-
-  startBtn.addEventListener("click", startGame);
-
-  function startGame() {
-    sequence = [];
-    playerSequence = [];
-    statusText.textContent = "Watch the pattern";
-    nextRound();
-  }
-
-  function nextRound() {
-    playerSequence = [];
-    canClick = false;
-    statusText.textContent = `Round ${sequence.length + 1}`;
-
-    const next = Math.floor(Math.random() * gridSize);
-    sequence.push(next);
-
-    playSequence();
-  }
-
-  function playSequence() {
-    let i = 0;
-    const interval = setInterval(() => {
-      flash(cards[sequence[i]]);
-      i++;
-      if (i >= sequence.length) {
-        clearInterval(interval);
-        canClick = true;
-      }
-    }, 600);
-  }
-
-  function flash(card) {
-    card.classList.add("active");
-    setTimeout(() => card.classList.remove("active"), 300);
-  }
-
-  function handleClick(index) {
-    if (!canClick) return;
-
-    playerSequence.push(index);
-    flash(cards[index]);
-
-    const current = playerSequence.length - 1;
-
-    if (playerSequence[current] !== sequence[current]) {
-      statusText.textContent = "Game Over!";
-      canClick = false;
-      return;
-    }
-
-    if (playerSequence.length === sequence.length) {
-      setTimeout(nextRound, 800);
-    }
-  }
-}
-
-// ===== TIC TAC TOE CODE =====
 const ticCells = document.querySelectorAll('.cell');
 const ticStatus = document.getElementById('tic-status');
 const ticResetButton = document.getElementById('tic-reset');
@@ -273,6 +190,12 @@ if (ticCells.length && ticStatus && ticResetButton) {
   let board = ["", "", "", "", "", "", "", "", ""];
   let currentPlayer = "X";
   let gameActive = true;
+
+  // Who is Player or CPU
+  let playerTypes = { X: "Player", O: "CPU" }; // default: X is Player, O is CPU
+
+  // Score tracking
+  let scores = { X: 0, O: 0 };
 
   const winningConditions = [
     [0, 1, 2],
@@ -285,44 +208,110 @@ if (ticCells.length && ticStatus && ticResetButton) {
     [2, 4, 6]
   ];
 
+  // ----- Create Buttons to toggle X and O -----
+  const xButton = document.createElement('button');
+  xButton.textContent = "X: Player";
+  xButton.style.marginRight = "10px";
+
+  const oButton = document.createElement('button');
+  oButton.textContent = "O: CPU";
+
+  const buttonContainer = document.createElement('div');
+  buttonContainer.style.marginBottom = "10px";
+  buttonContainer.appendChild(xButton);
+  buttonContainer.appendChild(oButton);
+  document.body.insertBefore(buttonContainer, ticStatus);
+
+  xButton.addEventListener('click', () => {
+    playerTypes.X = playerTypes.X === "Player" ? "CPU" : "Player";
+    xButton.textContent = `X: ${playerTypes.X}`;
+    if (currentPlayer === "X" && playerTypes.X === "CPU") cpuMove();
+  });
+
+  oButton.addEventListener('click', () => {
+    playerTypes.O = playerTypes.O === "Player" ? "CPU" : "Player";
+    oButton.textContent = `O: ${playerTypes.O}`;
+    if (currentPlayer === "O" && playerTypes.O === "CPU") cpuMove();
+  });
+
+  // ----- Create Scoreboard -----
+  const scoreBoard = document.createElement('div');
+  scoreBoard.style.marginBottom = "15px";
+  scoreBoard.textContent = `Score - X: ${scores.X} | O: ${scores.O}`;
+  document.body.insertBefore(scoreBoard, buttonContainer);
+
+  function updateScoreboard() {
+    scoreBoard.textContent = `Score - X: ${scores.X} | O: ${scores.O}`;
+  }
+
+  // ----- Handle Cell Click -----
   function handleCellClick(e) {
     const index = e.target.dataset.index;
-
     if (board[index] !== "" || !gameActive) return;
+    if (playerTypes[currentPlayer] === "CPU") return; // ignore clicks on CPU turn
 
+    makeMove(index);
+  }
+
+  function makeMove(index) {
     board[index] = currentPlayer;
-    e.target.textContent = currentPlayer;
-
+    ticCells[index].textContent = currentPlayer;
     checkWinner();
   }
 
+  // ----- CPU Move -----
+  function cpuMove() {
+    if (!gameActive || playerTypes[currentPlayer] === "Player") return;
+
+    const emptyCells = board.map((v, i) => v === "" ? i : null).filter(v => v !== null);
+    const move = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+
+    setTimeout(() => {
+      makeMove(move);
+    }, 300); // delay to simulate thinking
+  }
+
+  // ----- Check Winner -----
   function checkWinner() {
     for (let [a, b, c] of winningConditions) {
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         ticStatus.textContent = `Player ${currentPlayer} wins!`;
         gameActive = false;
+
+        // Update score
+        scores[currentPlayer]++;
+        updateScoreboard();
         return;
       }
     }
 
     if (!board.includes("")) {
       ticStatus.textContent = "It's a tie!";
-      gameActive = false;
       return;
     }
 
+    // Switch player
     currentPlayer = currentPlayer === "X" ? "O" : "X";
-    ticStatus.textContent = `Player ${currentPlayer}'s turn`;
+    ticStatus.textContent = `${currentPlayer}'s turn (${playerTypes[currentPlayer]})`;
+
+    // If CPU turn, make auto move
+    if (playerTypes[currentPlayer] === "CPU") cpuMove();
   }
 
+  // ----- Reset Game -----
   function resetGame() {
     board = ["", "", "", "", "", "", "", "", ""];
     currentPlayer = "X";
     gameActive = true;
     ticCells.forEach(cell => cell.textContent = "");
-    ticStatus.textContent = `Player ${currentPlayer}'s turn`;
+    ticStatus.textContent = `${currentPlayer}'s turn (${playerTypes[currentPlayer]})`;
+
+    if (playerTypes[currentPlayer] === "CPU") cpuMove();
   }
 
   ticCells.forEach(cell => cell.addEventListener('click', handleCellClick));
   ticResetButton.addEventListener('click', resetGame);
+
+  // Initial CPU move if X is CPU
+  if (playerTypes[currentPlayer] === "CPU") cpuMove();
 }
