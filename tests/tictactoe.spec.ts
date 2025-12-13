@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Tic Tac Toe', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3000/tictactoe.html'); // adjust to your dev server
+    await page.goto('http://localhost:5173/tictactoe.html'); 
   });
 
   test('loads initial game state', async ({ page }) => {

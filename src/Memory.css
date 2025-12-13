@@ -1,6 +1,6 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
 
-/* Root variables for dark mode (default) */
+
 :root {
   --background: #0b1623;
   --text-color: #f5f8ff;
@@ -10,7 +10,7 @@
   --incorrect: #3a3a3c;
 }
 
-/* Light mode overrides */
+
 .light-mode {
   --background: #f5f8ff;
   --text-color: #0b1623;
@@ -20,7 +20,7 @@
   --incorrect: #ff4d4d;
 }
 
-/* General styles */
+
 body {
   background-color: var(--background);
   color: var(--text-color);
@@ -30,7 +30,7 @@ body {
   padding: 20px;
 }
 
-/* Wordle grid */
+
 #wordle-grid {
   display: grid;
   gap: 8px;
@@ -39,7 +39,7 @@ body {
   margin-top: 20px;
 }
 
-/* Letter tiles */
+
 .letter {
   width: 60px;
   height: 60px;
@@ -54,7 +54,6 @@ body {
   color: var(--text-color);
 }
 
-/* Feedback colors */
 .correct {
   background-color: var(--correct);
   border-color: var(--correct);
@@ -73,14 +72,14 @@ body {
   color: #fff;
 }
 
-/* Game result text */
+
 #game-result {
   margin-top: 20px;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-/* Light/dark toggle button */
+
 #mode-toggle {
   position: absolute;
   top: 20px;

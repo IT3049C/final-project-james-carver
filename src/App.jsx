@@ -5,7 +5,7 @@ function App() {
     <>
       <h1>GameHub</h1>
       <p>Welcome to GameHub</p>
-      {/* Add navigation or links to other pages if you want */}
+     
     </>
   );
 }

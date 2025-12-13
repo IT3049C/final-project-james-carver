@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Memory Cards', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3000/memory.html'); // adjust to your dev server
+    await page.goto('http://localhost:5173/memory.html'); // 
   });
 
   test('loads initial game state', async ({ page }) => {

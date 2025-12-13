@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Hub Page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3000/index.html'); // adjust to your dev server
+    await page.goto('http://localhost:5173/index.html'); // adjust to your dev server
   });
 
   test('loads the landing page', async ({ page }) => {

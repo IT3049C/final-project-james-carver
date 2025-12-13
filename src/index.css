@@ -1,4 +1,4 @@
-/* Root variables (dark mode default) */
+
 :root {
   --background: #0b1623;
   --text-color: rgba(255, 255, 255, 0.87);
@@ -12,7 +12,6 @@
   --button-hover: #45a049;
 }
 
-/* Light mode overrides */
 .light-mode {
   --background: #f5f8ff;
   --text-color: #0b1623;
@@ -26,7 +25,6 @@
   --button-hover: #0056b3;
 }
 
-/* General styles */
 body {
   margin: 0;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -48,7 +46,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Links */
 a {
   font-weight: 500;
   color: var(--link-color);
@@ -59,7 +56,6 @@ a:hover {
   color: var(--link-hover);
 }
 
-/* Navigation */
 nav {
   display: flex;
   justify-content: center;
@@ -67,7 +63,6 @@ nav {
   flex-wrap: wrap;
 }
 
-/* Game cards */
 .game-card {
   background: var(--card-bg);
   padding: 20px 30px;
@@ -86,7 +81,6 @@ nav {
   background: var(--card-hover);
 }
 
-/* User input section */
 #user-input-section {
   display: flex;
   flex-direction: column;
@@ -126,7 +120,6 @@ nav {
   font-size: 18px;
 }
 
-/* Dark/light toggle button */
 #mode-toggle {
   position: absolute;
   top: 20px;

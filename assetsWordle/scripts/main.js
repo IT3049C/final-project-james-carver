@@ -150,7 +150,7 @@ if (grid && GameResultParagraph) {
   }
 const hintBtn = document.getElementById("hint-btn");
 const hintRow = document.getElementById("hint-row");
-const revealedHints = new Set(); // Track revealed indices
+const revealedHints = new Set(); 
 
 hintBtn.addEventListener("click", showHint);
 

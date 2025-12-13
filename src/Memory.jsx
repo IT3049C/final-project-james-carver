@@ -12,8 +12,8 @@ export default function Memory() {
   const [canClick, setCanClick] = useState(false);
   const [round, setRound] = useState(0);
   const [status, setStatus] = useState("Click Start");
-  const [gameOver, setGameOver] = useState(false); // new
-  const [scoreMessage, setScoreMessage] = useState(""); // new
+  const [gameOver, setGameOver] = useState(false);
+  const [scoreMessage, setScoreMessage] = useState("");
 
   const startGame = () => {
     setSequence([]);
