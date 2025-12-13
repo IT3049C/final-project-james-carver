@@ -64,7 +64,17 @@
     </div>
     <div id="status">Player X's turn</div>
     <button id="reset">Reset Game</button>
-    <p>Player Name: <span id="playername"></span></p>
+ <p>Player Name: <span id="playername"></span></p>
+
+<script>
+  // Wait until DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const playerSpan = document.getElementById('playername');
+    const playername = localStorage.getItem('playername'); 
+
+    playerSpan.textContent = playername || "Guest";
+  });
+</script>
     <script type="module" src="./assetsWordle/scripts/dark-mode-toggle.js"></script>
     <script type="module" src=assetsWordle/scripts/tictactoe.js></script>
 </body>
