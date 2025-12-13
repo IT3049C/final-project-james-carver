@@ -7,29 +7,54 @@
 </head>
 <body>
     <header>
-    <button id="mode-toggle">Dark/Light Mode</button>
-  </header>
+        <button id="mode-toggle">Dark/Light Mode</button>
+    </header>
+
     <h1>Rock Paper Scissors</h1>
-    
-    <p>Choose your move:</p>
-    <button onclick="play('rock')">Rock</button>
-    <button onclick="play('paper')">Paper</button>
-    <button onclick="play('scissors')">Scissors</button>
 
+    <div>
+        <button id="player1-toggle">Player 1: HUMAN</button>
+        <button id="player2-toggle">Player 2: CPU</button>
+    </div>
+
+    <div>
+        <h3>Player 1</h3>
+        <button onclick="selectChoice(1, 'rock')">Rock</button>
+        <button onclick="selectChoice(1, 'paper')">Paper</button>
+        <button onclick="selectChoice(1, 'scissors')">Scissors</button>
+    </div>
+
+    <div>
+        <h3>Player 2</h3>
+        <button onclick="selectChoice(2, 'rock')">Rock</button>
+        <button onclick="selectChoice(2, 'paper')">Paper</button>
+        <button onclick="selectChoice(2, 'scissors')">Scissors</button>
+    </div>
+
+
+    <div>
+      <h3> </h3>
+      <h3> </h3>
+      <h3> </h3>
+      <h3> </h3>
+        <button id="play-game-btn">Play Game</button>
+    </div>
+
+   
     <h2 id="result"></h2>
- <p>Player Name: <span id="playername"></span></p>
 
-<script>
-  // Wait until DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    const playerSpan = document.getElementById('playername');
-    const playername = localStorage.getItem('playername'); 
 
-    playerSpan.textContent = playername || "Guest";
-  });
-</script>
+    <p>Player Name: <span id="playername"></span></p>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const playerSpan = document.getElementById('playername');
+        const playername = localStorage.getItem('playername'); 
+        playerSpan.textContent = playername || "Guest";
+      });
+    </script>
+
     <script type="module" src="assetsWordle/scripts/main.js"></script>
     <script type="module" src="./assetsWordle/scripts/dark-mode-toggle.js"></script>
-
 </body>
 </html>

@@ -148,39 +148,148 @@ if (grid && GameResultParagraph) {
     setupGrid();
     document.addEventListener("keydown", handleKeyDown);
   }
+const hintBtn = document.getElementById("hint-btn");
+const hintRow = document.getElementById("hint-row");
+const revealedHints = new Set(); // Track revealed indices
+
+hintBtn.addEventListener("click", showHint);
+
+function showHint() {
+  if (!gameState.targetWord) return;
+
+  const unknownIndices = [];
+  const currentAttempt = gameState.currentAttempt;
+  
+  for (let i = 0; i < config.wordLength; i++) {
+    const cell = document.getElementById(`cell-${currentAttempt}-${i}`);
+    if (cell && !cell.textContent && !revealedHints.has(i)) {
+      unknownIndices.push(i);
+    }
+  }
+
+  if (unknownIndices.length === 0) return;
+
+  // Pick a random unknown letter index
+  const randomIndex = unknownIndices[Math.floor(Math.random() * unknownIndices.length)];
+  revealedHints.add(randomIndex);
+
+  // Create a hint letter element
+  const hintLetter = document.createElement("div");
+  hintLetter.className = "letter hint";
+  hintLetter.textContent = gameState.targetWord[randomIndex];
+  hintRow.appendChild(hintLetter);
+
+  // Optional: animate the hint
+  animateElement(hintLetter, "bounceIn");
+}
 
   initWordle();
 }
 
 // ===== ROCK PAPER SCISSORS CODE =====
 const resultElement = document.getElementById('result');
+const player1Btn = document.getElementById('player1-toggle');
+const player2Btn = document.getElementById('player2-toggle');
+const playGameBtn = document.getElementById('play-game-btn');
 
 if (resultElement) {
-  function play(userChoice) {
-    const choices = ['rock', 'paper', 'scissors'];
-    const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+  // Track player types: 'human' or 'cpu'
+  let player1Type = 'human';
+  let player2Type = 'cpu';
+
+  // Track human choices before CPU plays
+  let player1Choice = null;
+  let player2Choice = null;
+
+  const choices = ['rock', 'paper', 'scissors'];
+
+  // Toggle player type
+  function togglePlayer(player) {
+    if (player === 1) {
+      player1Type = player1Type === 'human' ? 'cpu' : 'human';
+      player1Btn.textContent = `Player 1: ${player1Type.toUpperCase()}`;
+      player1Choice = null; // Reset choice when switching type
+    } else {
+      player2Type = player2Type === 'human' ? 'cpu' : 'human';
+      player2Btn.textContent = `Player 2: ${player2Type.toUpperCase()}`;
+      player2Choice = null;
+    }
+  }
+
+  player1Btn.addEventListener('click', () => togglePlayer(1));
+  player2Btn.addEventListener('click', () => togglePlayer(2));
+
+  // Play a round automatically when both choices are ready
+  function checkAndPlay() {
+    // Auto-generate CPU choices if needed
+    if (player1Type === 'cpu' && !player1Choice) {
+      player1Choice = choices[Math.floor(Math.random() * choices.length)];
+    }
+    if (player2Type === 'cpu' && !player2Choice) {
+      player2Choice = choices[Math.floor(Math.random() * choices.length)];
+    }
+
+    // Wait for human input if human hasn't chosen yet
+    if (!player1Choice || !player2Choice) return;
 
     let result = '';
 
-    if (userChoice === computerChoice) {
-      result = `It's a tie! You both chose ${userChoice}.`;
+    if (player1Choice === player2Choice) {
+      result = `It's a tie! Both chose ${player1Choice}.`;
     } else if (
-      (userChoice === 'rock' && computerChoice === 'scissors') ||
-      (userChoice === 'paper' && computerChoice === 'rock') ||
-      (userChoice === 'scissors' && computerChoice === 'paper')
+      (player1Choice === 'rock' && player2Choice === 'scissors') ||
+      (player1Choice === 'paper' && player2Choice === 'rock') ||
+      (player1Choice === 'scissors' && player2Choice === 'paper')
     ) {
-      result = `You win! ${userChoice} beats ${computerChoice}.`;
+      result = `Player 1 wins! ${player1Choice} beats ${player2Choice}.`;
     } else {
-      result = `You lose! ${computerChoice} beats ${userChoice}.`;
+      result = `Player 2 wins! ${player2Choice} beats ${player1Choice}.`;
     }
 
     resultElement.textContent = result;
+
+    // Reset choices for next round
+    player1Choice = player1Type === 'human' ? null : player1Choice;
+    player2Choice = player2Type === 'human' ? null : player2Choice;
   }
 
-  window.play = play;
+  // Human selects a choice
+  function selectChoice(player, choice) {
+    if (player === 1 && player1Type === 'human') {
+      player1Choice = choice;
+    } else if (player === 2 && player2Type === 'human') {
+      player2Choice = choice;
+    }
+    checkAndPlay();
+  }
+
+  // Play Game button
+  if (playGameBtn) {
+    playGameBtn.addEventListener('click', () => {
+      // Auto-generate CPU choices if needed
+      if (player1Type === 'cpu' && !player1Choice) {
+        player1Choice = choices[Math.floor(Math.random() * choices.length)];
+      }
+      if (player2Type === 'cpu' && !player2Choice) {
+        player2Choice = choices[Math.floor(Math.random() * choices.length)];
+      }
+
+      // Check if both choices are ready (all CPU or human+CPU)
+      if (player1Choice && player2Choice) {
+        checkAndPlay();
+      } else {
+        resultElement.textContent = 'Waiting for human player(s) to choose.';
+      }
+    });
+  }
+
+  // Expose functions globally
+  window.selectChoice = selectChoice;
+  window.togglePlayer = togglePlayer;
 }
 
-// ===== MEMORY CARDS CODE =====
+
+// ===== TIC TAC TOE =====
 const ticCells = document.querySelectorAll('.cell');
 const ticStatus = document.getElementById('tic-status');
 const ticResetButton = document.getElementById('tic-reset');

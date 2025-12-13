@@ -93,3 +93,11 @@ body {
   cursor: pointer;
   border-radius: 4px;
 }
+#hint-row {
+  display: grid;
+  grid-auto-flow: column;  /* Flow items in a row */
+  justify-content: center;  /* Center items horizontally */
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
