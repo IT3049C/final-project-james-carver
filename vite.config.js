@@ -9,6 +9,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         wordle: resolve(__dirname, 'wordle.html'),
+        rockpapercissors: resolve(__dirname, 'rps.html'),
+        tictactoe: resolve(__dirname, 'tictactoe.html')
       },
     },
   },

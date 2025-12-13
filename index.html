@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GameHub</title>
-    <link rel="stylesheet" href="./assetsWordle/styles/index.css" />
+    <link rel="stylesheet" href="./assetsWordle/styles/style.css" />
+    
   </head>
   <body>
+    <button id="mode-toggle">Dark/Light Mode</button>
     <div id="root"></div>
     <nav>
       <a class="game-card" href="./wordle.html">Wordle</a>
-      <a class="game-card" href="./rockpaperscissors.html">Rock Paper Scissors</a>
+      <a class="game-card" href="./rps.html">Rock Paper Scissors</a>
       <a class="game-card" href="./tictactoe.html">Tic Tac Toe</a>
       <a class="game-card" href="./hangman.html">Hangman</a>
     </nav>
@@ -49,5 +51,6 @@
 
 
     <script type="module" src="./src/main.jsx"></script>
+    <script type="module" src="./assetsWordle/scripts/dark-mode-toggle.js"></script>
   </body>
 </html>
