@@ -263,3 +263,66 @@ if (game && startBtn && statusText) {
   }
 }
 
+// ===== TIC TAC TOE CODE =====
+const ticCells = document.querySelectorAll('.cell');
+const ticStatus = document.getElementById('tic-status');
+const ticResetButton = document.getElementById('tic-reset');
+
+if (ticCells.length && ticStatus && ticResetButton) {
+
+  let board = ["", "", "", "", "", "", "", "", ""];
+  let currentPlayer = "X";
+  let gameActive = true;
+
+  const winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+
+  function handleCellClick(e) {
+    const index = e.target.dataset.index;
+
+    if (board[index] !== "" || !gameActive) return;
+
+    board[index] = currentPlayer;
+    e.target.textContent = currentPlayer;
+
+    checkWinner();
+  }
+
+  function checkWinner() {
+    for (let [a, b, c] of winningConditions) {
+      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        ticStatus.textContent = `Player ${currentPlayer} wins!`;
+        gameActive = false;
+        return;
+      }
+    }
+
+    if (!board.includes("")) {
+      ticStatus.textContent = "It's a tie!";
+      gameActive = false;
+      return;
+    }
+
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    ticStatus.textContent = `Player ${currentPlayer}'s turn`;
+  }
+
+  function resetGame() {
+    board = ["", "", "", "", "", "", "", "", ""];
+    currentPlayer = "X";
+    gameActive = true;
+    ticCells.forEach(cell => cell.textContent = "");
+    ticStatus.textContent = `Player ${currentPlayer}'s turn`;
+  }
+
+  ticCells.forEach(cell => cell.addEventListener('click', handleCellClick));
+  ticResetButton.addEventListener('click', resetGame);
+}

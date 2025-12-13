@@ -21,7 +21,7 @@
     .card {
       width: 80px;
       height: 80px;
-      background: #333;
+      background: #505050;
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.2s;
@@ -43,13 +43,24 @@
   </style>
 </head>
 <body>
-
+<button id="mode-toggle">Dark/Light Mode</button>
   <h1>Memory Cards</h1>
   <button id="startBtn">Start Game</button>
   <div id="status">Click Start</div>
 
   <div id="game"></div>
+ <p>Player Name: <span id="playername"></span></p>
 
+<script>
+  // Wait until DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const playerSpan = document.getElementById('playername');
+    const playername = localStorage.getItem('playername'); 
+
+    playerSpan.textContent = playername || "Guest";
+  });
+  </script>
   <script type="module" src="assetsWordle/scripts/main.js"></script>
+  <script type="module" src="assetsWordle/scripts/dark-mode-toggle.js"></script>
 </body>
 </html>
