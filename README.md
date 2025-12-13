@@ -7,7 +7,7 @@ Cloning the git respository and running an npm test should be suffucient
 ```
 git clone https://github.com/IT3049C/final-project-james-carver
 npm run build
-npm test
+npm run test e2e
 ```
 
 Should ypou want to view the Web UI simply visit
