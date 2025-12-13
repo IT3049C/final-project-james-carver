@@ -10,7 +10,8 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         wordle: resolve(__dirname, 'wordle.html'),
         rockpapercissors: resolve(__dirname, 'rps.html'),
-        tictactoe: resolve(__dirname, 'tictactoe.html')
+        tictactoe: resolve(__dirname, 'tictactoe.html'),
+        memory: resolve(__dirname, "memory.html")
       },
     },
   },

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="./assetsWordle/styles/style.css" />
+  <meta charset="UTF-8">
+  <title>Memory Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+    }
+    #game {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .card {
+      width: 80px;
+      height: 80px;
+      background: #333;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .card.active {
+      background: #00ffcc;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #status {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Memory Cards</h1>
+  <button id="startBtn">Start Game</button>
+  <div id="status">Click Start</div>
+
+  <div id="game"></div>
+
+  <script type="module" src="assetsWordle/scripts/main.js"></script>
+</body>
+</html>

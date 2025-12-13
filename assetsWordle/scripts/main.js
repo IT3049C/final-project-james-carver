@@ -180,3 +180,86 @@ if (resultElement) {
   // Make it globally accessible for onclick buttons
   window.play = play;
 }
+
+// ===== MEMORY CARDS CODE =====
+const game = document.getElementById("game");
+const startBtn = document.getElementById("startBtn");
+const statusText = document.getElementById("status");
+
+if (game && startBtn && statusText) {
+  const gridSize = 16;
+
+  let sequence = [];
+  let playerSequence = [];
+  let canClick = false;
+
+  // Create grid
+  const cards = [];
+  game.innerHTML = ""; // safety reset
+
+  for (let i = 0; i < gridSize; i++) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.dataset.index = i;
+    card.addEventListener("click", () => handleClick(i));
+    game.appendChild(card);
+    cards.push(card);
+  }
+
+  startBtn.addEventListener("click", startGame);
+
+  function startGame() {
+    sequence = [];
+    playerSequence = [];
+    statusText.textContent = "Watch the pattern";
+    nextRound();
+  }
+
+  function nextRound() {
+    playerSequence = [];
+    canClick = false;
+    statusText.textContent = `Round ${sequence.length + 1}`;
+
+    const next = Math.floor(Math.random() * gridSize);
+    sequence.push(next);
+
+    playSequence();
+  }
+
+  function playSequence() {
+    let i = 0;
+    const interval = setInterval(() => {
+      flash(cards[sequence[i]]);
+      i++;
+      if (i >= sequence.length) {
+        clearInterval(interval);
+        canClick = true;
+      }
+    }, 600);
+  }
+
+  function flash(card) {
+    card.classList.add("active");
+    setTimeout(() => card.classList.remove("active"), 300);
+  }
+
+  function handleClick(index) {
+    if (!canClick) return;
+
+    playerSequence.push(index);
+    flash(cards[index]);
+
+    const current = playerSequence.length - 1;
+
+    if (playerSequence[current] !== sequence[current]) {
+      statusText.textContent = "Game Over!";
+      canClick = false;
+      return;
+    }
+
+    if (playerSequence.length === sequence.length) {
+      setTimeout(nextRound, 800);
+    }
+  }
+}
+
