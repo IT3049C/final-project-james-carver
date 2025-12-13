@@ -10,7 +10,7 @@ npm run build
 npm run test e2e
 ```
 
-Should ypou want to view the Web UI simply visit
+Should you want to view the Web UI simply visit
 ```
 https://it3049c.github.io/final-project-james-carver/
 ```
